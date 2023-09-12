@@ -34,9 +34,12 @@ const OptionsSection = ({ options }: { options: OptionsInterface[] }) => {
 
   return (
     <div className="w-full">
-      <div className="h-screen flex flex-col justify-between w-full">
+      <div className="h-screen flex flex-col justify-between w-full p-3 relative">
+        {!isLoggedIn ? (
+          <div className="w-full h-screen bg-gray-800 absolute top-0 left-0 opacity-80"></div>
+        ) : null}
         {optionRenderer()}
-        <div className="bg-red-300">
+        <div className="z-10">
           <ConnectButton />
         </div>
       </div>

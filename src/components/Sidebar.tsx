@@ -27,12 +27,13 @@ const Sidebar = () => {
   );
 
   return (
-    <div className="bg-gray-900 col-span-1 h-screen hidden md:flex items-start justify-end">
-      <div className="flex justify-end items-end left-0 top-5 flex-col">
+    <div className="bg-gray-900 col-span-1 h-screen hidden md:flex flex-col items-end justify-end">
+      <div className="flex justify-between items-start left-0 top-5 flex-col h-screen">
         <div className="flex justify-start flex-col">
           {renderedSideBarItems}
         </div>
       </div>
+      <p className="text-gray-700 w-full p-2 text-xs">Project by @iam_p2</p>
     </div>
   );
 };

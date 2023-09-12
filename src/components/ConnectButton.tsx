@@ -34,16 +34,16 @@ const ConnectButton = () => {
   };
 
   return (
-    <div>
+    <div className="z-20">
       <button
         className={`p-2 rounded w-full transition all ${
           isLoggedIn
-            ? "bg-green-400 hover:bg-green-300"
-            : "bg-red-400 hover:bg-red-300"
+            ? "bg-red-400 hover:bg-red-300"
+            : "bg-green-400 hover:bg-green-300"
         }`}
         onClick={isLoggedIn ? handleLogOut : handleLogIn}
       >
-        {isLoggedIn ? "Log outasdasdasdasdasdasdasdasdasdasdasdasdasd" : "Log inasdasdasdasdasdasdasdasdasdas"}
+        {isLoggedIn ? "Log out" : "Log in"}
       </button>
     </div>
   );
