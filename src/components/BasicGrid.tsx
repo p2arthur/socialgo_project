@@ -5,7 +5,7 @@ import DynamicSection from "./DynamicSection";
 
 const BasicGrid = ({ type }: contentSectionInterface): ReactNode => {
   return (
-    <div className="grid grid-cols-6 col-span-6 md:col-span-5 h-screen">
+    <div className="grid grid-cols-6 col-span-6 md:col-span-5 h-screen mt-10">
       <div className="col-span-6 md:col-span-5">
         <DynamicSection type="feed" />
       </div>

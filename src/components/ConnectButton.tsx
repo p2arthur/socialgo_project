@@ -1,50 +1,48 @@
-import React from "react";
+import { useEffect } from "react";
 import { useWallet } from "@txnlab/use-wallet";
-import { useDispatch } from "react-redux/es/exports";
-import { logIn, logOut } from "../store/reducers/userReducer";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
-import { RootState } from "../store/store";
+import formatWalletAddress from "../utils/formatWalletAddress";
+import { BiLogOut } from "react-icons/bi";
 
-interface userInitialStateInterface {
-  userId: string;
-  isLoggedIn: boolean;
-  userWallet: string;
-}
 const ConnectButton = () => {
-  const { providers } = useWallet();
-  const isLoggedIn: Boolean = useSelector(
-    (state: RootState) => state.user.isLoggedIn
-  );
+  const { providers, activeAccount } = useWallet();
 
-  const dispatch = useDispatch();
-
-  console.log(providers);
-
-  const handleLogIn = () => {
-    dispatch(
-      logIn({
-        userId: "aoisdj09asdj091j",
-        userWallet: "as890s8jhslkjnm,as8du",
-      })
-    );
-    console.log("Log in");
+  const handleLogIn = async () => {
+    if (providers) {
+      try {
+        providers[0].connect();
+      } catch (error) {
+        console.error("Error connecting with wallet");
+      }
+    }
   };
-  const handleLogOut = () => {
-    dispatch(logOut({ userId: "", userWallet: "" }));
+  const handleLogOut = async () => {
+    if (providers) {
+      await providers[0].disconnect();
+    }
   };
 
   return (
-    <div className="z-20">
-      <button
-        className={`p-2 rounded w-full transition all ${
-          isLoggedIn
-            ? "bg-red-400 hover:bg-red-300"
-            : "bg-green-400 hover:bg-green-300"
-        }`}
-        onClick={isLoggedIn ? handleLogOut : handleLogIn}
-      >
-        {isLoggedIn ? "Log out" : "Log in"}
-      </button>
+    <div className="w-32">
+      {!activeAccount ? (
+        <button
+          className="p-1 rounded w-full transition all bg-transparent border border-gray-100 text-gray-100 hover:bg-cyan-500 hover:border-transparent text-xs"
+          onClick={handleLogIn}
+        >
+          Connect wallet
+        </button>
+      ) : (
+        <div className="flex">
+          <button className="w-3/4 rounded-bl rounded-tl bg-cyan-500 p-1 text-sm">
+            {formatWalletAddress(activeAccount.address)}
+          </button>
+          <button
+            className="p-1 rounded-tr rounded-br w-1/4 transition all bg-transparent hover:bg-red-700 bg-red-500 flex flex-col items-center justify-center"
+            onClick={handleLogOut}
+          >
+            <BiLogOut className="" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

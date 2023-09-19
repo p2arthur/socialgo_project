@@ -1,5 +1,4 @@
 import Home from "./pages/home";
-import React from "react";
 import {
   WalletProvider,
   useInitializeProviders,
@@ -7,6 +6,9 @@ import {
 } from "@txnlab/use-wallet";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { DeflyWalletConnect } from "@blockshake/defly-connect";
+import { PeraWalletConnect } from "@perawallet/connect";
+import { DaffiWalletConnect } from "@daffiwallet/connect";
 
 const getDynamicPeraWalletConnect = async () => {
   const PeraWalletConnect = (await import("@perawallet/connect"))

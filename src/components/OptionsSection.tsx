@@ -1,17 +1,13 @@
 import { ReactNode } from "react";
 import ConnectButton from "./ConnectButton";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-
+import { useWallet } from "@txnlab/use-wallet";
 interface OptionsInterface {
   type: string;
   data: { title: string; subtitle: string; option: string };
 }
 
 const OptionsSection = ({ options }: { options: OptionsInterface[] }) => {
-  const isLoggedIn: Boolean = useSelector(
-    (state: RootState) => state.user.isLoggedIn
-  );
+  const { activeAccount } = useWallet();
 
   const optionRenderer = () => {
     return options.map((option, index) => {
@@ -35,13 +31,10 @@ const OptionsSection = ({ options }: { options: OptionsInterface[] }) => {
   return (
     <div className="w-full">
       <div className="h-screen flex flex-col justify-between w-full p-3 relative">
-        {!isLoggedIn ? (
-          <div className="w-full h-screen bg-gray-800 absolute top-0 left-0 opacity-80"></div>
+        {!activeAccount ? (
+          <div className="w-full h-screen bg-gray-800 absolute top-0 left-0 opacity-80" />
         ) : null}
         {optionRenderer()}
-        <div className="z-10">
-          <ConnectButton />
-        </div>
       </div>
     </div>
   );

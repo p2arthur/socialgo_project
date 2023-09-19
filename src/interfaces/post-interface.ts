@@ -1,6 +1,6 @@
 export interface postInterface {
   postId: string;
-  title: string;
+  creator: string;
   content: string;
-  interactions: { likes: number; comments: number };
+  interactions: { likes: number; comments: []; donations: number };
 }

@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 const Home = () => {
   return (
     <div className="grid grid-cols-6 h-screen">
+      <TopBar />
       <Sidebar />
       <BasicGrid type="sidebar" />
     </div>
